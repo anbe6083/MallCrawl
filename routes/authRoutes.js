@@ -1,6 +1,10 @@
 const passport = require('passport');
 
 module.exports = app => {
+  app.get('/', (req, res) => {
+    res.send('youre at /');
+  });
+
   app.get('/api/logout', (req, res) => {
     res.send('youre at /api/logout');
   });
