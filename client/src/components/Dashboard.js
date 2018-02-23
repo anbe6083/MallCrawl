@@ -10,9 +10,9 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const res = axios.get('/api/yelp').then(res => {
-      const newBusinesses = res.data['businesses'];
-      console.log(res.data);
+    const res = axios.get('/api/yelp').then((req, res) => {
+      const newBusinesses = req.data['businesses'];
+      console.log(req.data['businesses']);
       var businessArr = this.state.businesses.slice();
       newBusinesses.map(business => {
         businessArr.push(business);
@@ -35,7 +35,6 @@ export default class Dashboard extends Component {
   callApi = async api => {
     const response = await fetch(api);
     const body = await response.json();
-    console.log(body);
     if (response.status !== 200) throw Error(body.message);
 
     return body;
