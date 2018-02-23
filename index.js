@@ -39,7 +39,6 @@ let businesses = client
   console.log(error);
 });*/
     app.get('/api/yelp', (req, res) => {
-      console.log(response);
       res.send(response);
     });
   })

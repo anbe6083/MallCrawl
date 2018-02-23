@@ -12,8 +12,9 @@ export default class Dashboard extends Component {
   componentDidMount() {
     this.callApi('/api/yelp')
       .then(res => {
+        console.log(res);
         this.setState({
-          businesses: res
+          businesses: res.jsonBody.businesses
         });
       })
       .catch(err => console.log(err));
@@ -24,7 +25,7 @@ export default class Dashboard extends Component {
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
 
-    return body.jsonBody.businesses;
+    return body;
   };
 
   render() {
