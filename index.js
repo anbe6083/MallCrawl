@@ -39,7 +39,8 @@ let businesses = client
   console.log(error);
 });*/
     app.get('/api/yelp', (req, res) => {
-      res.send(response.jsonBody);
+      console.log(response.jsonBody.businesses);
+      res.send(response.jsonBody.businesses);
     });
   })
   .catch(error => {

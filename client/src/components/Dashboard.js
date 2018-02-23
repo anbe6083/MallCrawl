@@ -10,19 +10,21 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
-    this.callApi('/api/yelp').then(res =>
-      this.setState({
-        businesses: res
+    this.callApi('/api/yelp')
+      .then(res => {
+        this.setState({
+          businesses: res
+        });
       })
-    );
+      .catch(err => console.log(err));
   }
 
   callApi = async api => {
     const response = await fetch(api);
-    const body = await response.json();
+    const body = await response;
     if (response.status !== 200) throw Error(body.message);
 
-    return body.businesses;
+    return body.json();
   };
 
   render() {
