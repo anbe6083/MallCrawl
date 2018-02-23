@@ -18,7 +18,6 @@ export default class Dashboard extends Component {
     // });
     const res = axios.get('/api/yelp').then(async (req, res) => {
       const newBusinesses = await req.data['businesses'];
-      console.log(req.data['businesses']);
       var businessArr = this.state.businesses.slice();
       newBusinesses.map(business => {
         businessArr.push(business);
