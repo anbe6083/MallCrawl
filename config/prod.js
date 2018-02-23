@@ -8,6 +8,6 @@ module.exports = {
   },
   cookieKey: process.env.COOKIE_KEY,
   yelp: {
-    apiKey: process.end.YELP_API_KEY
+    apiKey: process.env.YELP_API_KEY
   }
 };
