@@ -9,26 +9,27 @@ export default class Dashboard extends Component {
     };
   }
 
-  async componentDidMount() {
-    // this.callApi('/api/yelp')
-    //   .then(res => {
-    //     console.log(res);
-    //     // this.setState({
-    //     //   businesses: res.jsonBody.businesses
-    //     // });
-    //   })
-    //   .catch(err => console.log(err));
-    const res = await axios.get('/api/yelp');
-    const apiBusinesses = await res.data['businesses'];
+  componentDidMount() {
+    const res = axios.get('/api/yelp').then(res => {
+      const newBusinesses = res.data['businesses'];
+      console.log(res.data);
+      var businessArr = this.state.businesses.slice();
+      newBusinesses.map(business => {
+        businessArr.push(business);
+      });
+      this.setState({
+        businesses: businessArr
+      });
+    });
 
-    console.log(apiBusinesses);
-    var businessArr = this.state.businesses.slice();
-    apiBusinesses.map(business => {
-      businessArr.push(business);
-    });
-    this.setState({
-      businesses: businessArr
-    });
+    // console.log(apiBusinesses);
+    // var businessArr = this.state.businesses.slice();
+    // apiBusinesses.map(business => {
+    //   businessArr.push(business);
+    // });
+    // this.setState({
+    //   businesses: businessArr
+    // });
   }
 
   callApi = async api => {
