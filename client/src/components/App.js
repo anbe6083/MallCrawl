@@ -43,7 +43,7 @@ class App extends Component {
                       className="grey-text text-lighten-3"
                       href="https://github.com/anbe6083"
                     >
-                      Github
+                      Check me out on Github!
                     </a>
                   </li>
                 </ul>
