@@ -13,7 +13,7 @@ export default class Dashboard extends Component {
     this.callApi('/api/yelp')
       .then(res => {
         this.setState({
-          businesses: res.businesses
+          businesses: res
         });
       })
       .catch(err => console.log(err));
