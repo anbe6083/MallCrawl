@@ -39,7 +39,7 @@ let businesses = client
   console.log(error);
 });*/
     app.get('/api/yelp', (req, res) => {
-      res.send(response.jsonBody.businesses);
+      res.json(response.jsonBody.businesses);
     });
   })
   .catch(error => {
