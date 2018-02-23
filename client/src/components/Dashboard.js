@@ -18,24 +18,17 @@ export default class Dashboard extends Component {
   }
 
   callApi = async api => {
-    const response = await fetch(api, {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
-    });
+    const response = await fetch(api);
     const body = await response.json();
-    console.log('response' + body);
     if (response.status !== 200) throw Error(body.message);
 
-    return body;
+    return body.businesses;
   };
 
   render() {
     return (
       <div>
         {this.state.businesses.map(business => {
-          console.log(business.name);
           return (
             <Nightlife_Entry
               key={business.id}
