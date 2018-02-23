@@ -5,12 +5,19 @@ export default class Nightlife_Entry extends Component {
     return (
       <Card
         className="small"
-        header={<CardTitle image="./img/sample-1.jpg">Card Title</CardTitle>}
-        actions={[<a href="#">Yelp!</a>]}
+        header={
+          <CardTitle image={this.props.image_url}>{this.props.name}</CardTitle>
+        }
+        actions={[
+          <a href={this.props.url}>{this.props.name} on Yelp!</a>,
+          <a class="waves-effect waves-light btn">Attending</a>
+        ]}
       >
-        I am a very simple card. I am good at containing small bits of
-        information. I am convenient because I require little markup to use
-        effectively.
+        {this.props.location.address1}
+        {'\n'}
+        {this.props.location.city}
+        {'\n'}
+        {this.props.location.state}
       </Card>
     );
   }

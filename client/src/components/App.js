@@ -6,14 +6,16 @@ import * as actions from '../actions';
 import Nightlife_Entry from './Nightlife_Entry';
 import Landing from './Landing';
 import { Footer } from 'react-materialize';
-const Dashboard = () => {
-  return (
-    <div>
-      <h2> Dashboard</h2>
-      <Nightlife_Entry />
-    </div>
-  );
-};
+import Dashboard from './Dashboard';
+
+// const Dashboard = () => {
+//   return (
+//     <div>
+//       <h2> Dashboard</h2>
+//       <Nightlife_Entry />
+//     </div>
+//   );
+// };
 const SurveyNew = () => {
   return (
     <div>

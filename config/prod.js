@@ -6,5 +6,8 @@ module.exports = {
   mongodb: {
     dev_dbURI: process.env.MONGO_URI
   },
-  cookieKey: process.env.COOKIE_KEY
+  cookieKey: process.env.COOKIE_KEY,
+  yelp: {
+    apiKey: process.end.YELP_API_KEY
+  }
 };
