@@ -3,11 +3,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Header from './Header';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
-
+import Nightlife_Entry from './Nightlife_Entry';
+import Landing from './Landing';
 const Dashboard = () => {
   return (
     <div>
       <h2> Dashboard</h2>
+      <Nightlife_Entry />
     </div>
   );
 };
@@ -18,13 +20,7 @@ const SurveyNew = () => {
     </div>
   );
 };
-const Landing = () => {
-  return (
-    <div>
-      <h2> Landing</h2>
-    </div>
-  );
-};
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();

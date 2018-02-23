@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect, MapStateToProps } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class Header extends Component {
   renderContent() {
@@ -9,7 +10,7 @@ class Header extends Component {
       case false:
         return (
           <li>
-            <a href="/auth/google">Login with Google</a>
+            <a href="/auth/google">Login With Google</a>
           </li>
         );
       default:
@@ -24,10 +25,13 @@ class Header extends Component {
   render() {
     return (
       <nav>
-        <div className="nav-wrapper">
-          <a href="#" className="left brand-logo">
+        <div className="nav-wrapper blue-grey">
+          <Link
+            to={this.props.auth ? '/dashboard' : '/'}
+            className="left brand-logo"
+          >
             MallCrawl
-          </a>
+          </Link>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
             {this.renderContent()}
           </ul>
