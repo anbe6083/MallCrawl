@@ -21,10 +21,10 @@ export default class Dashboard extends Component {
 
   callApi = async api => {
     const response = await fetch(api);
-    const body = await response;
+    const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
 
-    return body.json();
+    return body.jsonBody.businesses;
   };
 
   render() {
