@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Nightlife_Entry from './Nightlife_Entry';
 import Landing from './Landing';
+import { Footer } from 'react-materialize';
 const Dashboard = () => {
   return (
     <div>
@@ -33,6 +34,26 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Landing} />
             <Route exact path="/dashboard" component={Dashboard} />
+            <Footer
+              copyrights="&copy 2018 Copyright Text"
+              links={
+                <ul>
+                  <li>
+                    <a
+                      className="grey-text text-lighten-3"
+                      href="https://github.com/anbe6083"
+                    >
+                      Github
+                    </a>
+                  </li>
+                </ul>
+              }
+              className=" blue-grey"
+            >
+              <p className="grey-text text-lighten-4 ">
+                Built by Andrew Berumen
+              </p>
+            </Footer>
           </div>
         </BrowserRouter>
       </div>
