@@ -24,27 +24,19 @@ app.use(passport.session());
 const yelp = require('yelp-fusion');
 const client = yelp.client(keys.yelp.apiKey);
 
-let businesses = client
-  .search({
-    term: 'bars',
-    location: 'santa clarita, ca'
-  })
-  .then(response => {
-    /*let reviews = client.reviews(response.jsonBody.businesses[0].id).then(response => {
-  console.log(response.jsonBody.reviews[0].text);
-  app.get('/api/yelp/reviews', (req, res) => {
-    res.send(response.jsonBody.reviews[0]);
-  })
-}).catch(error => {
-  console.log(error);
-});*/
-    app.get('/api/yelp', (req, res) => {
+app.get('/api/yelp', (req, res) => {
+  client
+    .search({
+      term: 'bars',
+      location: 'santa clarita, ca'
+    })
+    .then(response => {
       res.send(response.jsonBody);
+    })
+    .catch(error => {
+      console.log(error);
     });
-  })
-  .catch(error => {
-    console.log(error);
-  });
+});
 
 require('./routes/authRoutes')(app);
 

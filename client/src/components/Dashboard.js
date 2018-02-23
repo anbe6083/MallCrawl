@@ -11,22 +11,22 @@ export default class Dashboard extends Component {
   }
 
   async componentDidMount() {
-    const res = await axios.get('/api/current_user');
-    console.log(res.data);
-    this.setState({
-      user: res.data
-    });
-    // const res = axios.get('/api/yelp').then(async (req, res) => {
-    //   const newBusinesses = await req.data['businesses'];
-    //   console.log(req.data['businesses']);
-    //   var businessArr = this.state.businesses.slice();
-    //   newBusinesses.map(business => {
-    //     businessArr.push(business);
-    //   });
-    //   this.setState({
-    //     businesses: businessArr
-    //   });
+    // const res = await axios.get('/api/current_user');
+    // console.log(res.data);
+    // this.setState({
+    //   user: res.data
     // });
+    const res = axios.get('/api/yelp').then(async (req, res) => {
+      const newBusinesses = await req.data['businesses'];
+      console.log(req.data['businesses']);
+      var businessArr = this.state.businesses.slice();
+      newBusinesses.map(business => {
+        businessArr.push(business);
+      });
+      this.setState({
+        businesses: businessArr
+      });
+    });
 
     // console.log(apiBusinesses);
     // var businessArr = this.state.businesses.slice();
@@ -49,10 +49,9 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        {this.state.user.googleId}
-        {/* {this.state.businesses.map(business => {
+        {/* {this.state.user.googleId} */}
+        {this.state.businesses.map(business => {
           return (
-            
             <Nightlife_Entry
               key={business.id}
               image_url={business.image_url}
@@ -61,7 +60,7 @@ export default class Dashboard extends Component {
               url={business.url}
             />
           );
-        })} */}
+        })}
       </div>
     );
   }
