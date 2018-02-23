@@ -35,7 +35,7 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Footer
-              copyrights="&copy 2018 Copyright Text"
+              copyrights="Copyright 2018 Andrew Berumen"
               links={
                 <ul>
                   <li>
