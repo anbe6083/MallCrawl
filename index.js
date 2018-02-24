@@ -5,6 +5,8 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 require('./models/users');
 require('./services/passport');
+const yelp = require('yelp-fusion');
+const client = yelp.client(keys.yelp.apiKey);
 
 mongoose.connect(keys.mongodb.dev_dbURI);
 
@@ -20,25 +22,13 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Yelp
-const yelp = require('yelp-fusion');
-const client = yelp.client(keys.yelp.apiKey);
-
-app.get('/api/yelp', (req, res) => {
-  client
-    .search({
-      term: 'bars',
-      location: 'santa clarita, ca'
-    })
-    .then(response => {
-      res.send(response.jsonBody);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-});
+require('./routes/yelpRoutes')(app);
 
 require('./routes/authRoutes')(app);
+
+app.get('/api/current_user', (req, res) => {
+  res.send(req.location);
+});
 
 if (process.env.NODE_ENV === 'production') {
   //Make sure express will serve up production assets
