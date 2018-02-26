@@ -26,10 +26,6 @@ require('./routes/yelpRoutes')(app);
 
 require('./routes/authRoutes')(app);
 
-app.get('/api/current_user', (req, res) => {
-  res.send(req.location);
-});
-
 if (process.env.NODE_ENV === 'production') {
   //Make sure express will serve up production assets
   //like our main.js/main.css file

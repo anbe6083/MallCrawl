@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { Input, Button } from 'react-materialize';
 import axios from 'axios';
+import { connect, MapStateToProps } from 'react-redux';
+import Dashboard from './Dashboard';
 class Landing extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      location: ''
+      locationInput: '',
+      location: '',
+      locationSubmitted: false,
+      businesses: []
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -15,15 +20,13 @@ class Landing extends Component {
 
   handleChange = event => {
     this.setState({
-      location: event.target.value
+      locationInput: event.target.value
     });
   };
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
-    const { location } = this.state;
-    const res = await axios.post('/api/location', { location });
-    console.log(res);
+    this.setState({ location: this.state.locationInput });
   };
 
   render() {
@@ -32,22 +35,32 @@ class Landing extends Component {
         <h1>MallCrawl</h1>
         Coordinate your nightlife plans with your friends!
         <div class="input-field col s6">
-          <form onSubmit={this.handleSubmit}>
+          <form
+            method="post"
+            onSubmit={this.handleSubmit}
+            action="/api/location"
+          >
             <Input
               s={6}
               type="text"
-              value={this.state.location}
+              value={this.state.locationInput}
               label="Location"
+              name="locationInput"
               onChange={this.handleChange}
             />
             <Button waves="light" type="submit">
               Search
             </Button>
           </form>
+          <Dashboard location={this.state.location} />
         </div>
       </div>
     );
   }
 }
 
-export default Landing;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Landing);

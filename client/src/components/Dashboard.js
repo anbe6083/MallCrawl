@@ -8,21 +8,29 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
       businesses: [],
-      user: {}
+      user: {},
+      location: ''
     };
   }
 
-  async componentDidMount() {
-    const res = axios.get('/api/yelp').then(async (req, res) => {
-      const newBusinesses = await req.data['businesses'];
-      var businessArr = this.state.businesses.slice();
-      newBusinesses.map(business => {
-        businessArr.push(business);
-      });
+  componentDidUpdate() {
+    if (this.props.location != this.state.location) {
+      this.yelpApiCall();
+      this.state.location = this.props.location;
+    }
+  }
+
+  yelpApiCall() {
+    let route = `/api/yelp/` + this.props.location;
+    axios.get(route).then((req, res) => {
       this.setState({
-        businesses: businessArr
+        businesses: req.data['businesses']
       });
     });
+  }
+
+  componentDidMount() {
+    this.yelpApiCall();
   }
 
   callApi = async api => {

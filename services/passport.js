@@ -30,7 +30,8 @@ passport.use(
         return done(null, existingUser);
       }
       const user = await new User({
-        googleId: profile.id
+        googleId: profile.id,
+        location: 'los angeles'
       }).save();
       done(null, user);
     }
