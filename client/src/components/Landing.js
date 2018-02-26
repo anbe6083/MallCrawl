@@ -10,7 +10,6 @@ class Landing extends Component {
     this.state = {
       locationInput: '',
       location: '',
-      locationSubmitted: false,
       businesses: []
     };
 
@@ -34,7 +33,7 @@ class Landing extends Component {
       <div style={{ textAlign: 'center' }}>
         <h1>MallCrawl</h1>
         Coordinate your nightlife plans with your friends!
-        <div class="input-field col s6">
+        {/* <div class="input-field col s6">
           <form
             method="post"
             onSubmit={this.handleSubmit}
@@ -53,7 +52,8 @@ class Landing extends Component {
             </Button>
           </form>
           <Dashboard location={this.state.location} />
-        </div>
+        </div> */}
+        <Dashboard location={this.state.location} />
       </div>
     );
   }

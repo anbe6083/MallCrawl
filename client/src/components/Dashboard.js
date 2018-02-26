@@ -7,6 +7,7 @@ export default class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      locationInput: '',
       businesses: [],
       user: {},
       location: ''
@@ -14,14 +15,20 @@ export default class Dashboard extends Component {
   }
 
   componentDidUpdate() {
-    if (this.props.location != this.state.location) {
+    if (this.state.locationInput != this.state.location) {
+      this.setState({ location: this.state.locationInput });
+    }
+  }
+
+  updateLocation() {
+    if (this.state.locationInput != this.state.location) {
       this.yelpApiCall();
-      this.state.location = this.props.location;
+      this.state.location = this.state.locationInput;
     }
   }
 
   yelpApiCall() {
-    let route = `/api/yelp/` + this.props.location;
+    let route = `/api/yelp/` + this.state.location;
     axios.get(route).then((req, res) => {
       this.setState({
         businesses: req.data['businesses']
@@ -33,19 +40,38 @@ export default class Dashboard extends Component {
     this.yelpApiCall();
   }
 
-  callApi = async api => {
-    const response = await fetch(api);
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
+  handleChange = event => {
+    this.setState({
+      locationInput: event.target.value
+    });
+  };
 
-    return body;
+  handleSubmit = event => {
+    event.preventDefault();
+    this.yelpApiCall();
   };
 
   render() {
     return (
       <div>
+        <div class="input-field col s6">
+          <form onSubmit={this.handleSubmit}>
+            <Input
+              s={6}
+              type="text"
+              value={this.state.locationInput}
+              label="Location"
+              name="locationInput"
+              onChange={this.handleChange}
+            />
+            <Button waves="light" type="submit">
+              Search
+            </Button>
+          </form>
+        </div>
         {this.state.businesses ? (
           this.state.businesses.map(business => {
+            console.log(business);
             return (
               <Nightlife_Entry
                 key={business.id}

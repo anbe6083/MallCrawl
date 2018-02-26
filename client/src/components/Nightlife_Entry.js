@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Card, CardTitle } from 'react-materialize';
+import { connect, MapStateToProps } from 'react-redux';
 import axios from 'axios';
-
-export default class Nightlife_Entry extends Component {
+class Nightlife_Entry extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,6 +32,18 @@ export default class Nightlife_Entry extends Component {
   }
 
   render() {
+    let attendingBtn = null;
+    if (this.props.auth) {
+      attendingBtn = (
+        <a
+          class="waves-effect waves-light btn"
+          onClick={this.updateNumberOfPeopleAttending}
+        >
+          {' '}
+          {this.state.peopleAttending} Attending
+        </a>
+      );
+    }
     return (
       <Card
         className="small"
@@ -40,13 +52,7 @@ export default class Nightlife_Entry extends Component {
         }
         actions={[
           <a href={this.props.url}>{this.props.name} on Yelp!</a>,
-          <a
-            class="waves-effect waves-light btn"
-            onClick={this.updateNumberOfPeopleAttending}
-          >
-            {' '}
-            {this.state.peopleAttending} Attending
-          </a>
+          attendingBtn
         ]}
       >
         {this.props.location.address1}
@@ -58,3 +64,9 @@ export default class Nightlife_Entry extends Component {
     );
   }
 }
+
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Nightlife_Entry);
