@@ -44,17 +44,21 @@ export default class Dashboard extends Component {
   render() {
     return (
       <div>
-        {this.state.businesses.map(business => {
-          return (
-            <Nightlife_Entry
-              key={business.id}
-              image_url={business.image_url}
-              location={business.location}
-              name={business.name}
-              url={business.url}
-            />
-          );
-        })}
+        {this.state.businesses ? (
+          this.state.businesses.map(business => {
+            return (
+              <Nightlife_Entry
+                key={business.id}
+                image_url={business.image_url}
+                location={business.location}
+                name={business.name}
+                url={business.url}
+              />
+            );
+          })
+        ) : (
+          <div />
+        )}
       </div>
     );
   }
